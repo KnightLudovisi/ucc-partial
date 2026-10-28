@@ -2,7 +2,7 @@
 declare(strict_types=1);
 
 use Core\Token;
-use Serv\ProgramServices;
+use Serv\ContactServices;
 
 require_once dirname(__DIR__, 2) . '/bootstrap.php';
 require_once dirname(__DIR__, 2) . '/app/Support/helper.php';
@@ -28,12 +28,12 @@ if (!Token::verify($_POST['csrf_key'] ?? null)) {
 session_write_close();
 
 try {
-    $serv = new ProgramServices();
+    $serv = new ContactServices();
     $serv->save();
 } catch (Throwable $e) {
     logError($e, 'Failed to process save request.', 'ERROR', [
-        'action' => 'save program',
-        'endpoint' => 'programs/save'
+        'action' => 'save contact',
+        'endpoint' => 'contacts/save'
     ]);
 
     jsonResponse(500);

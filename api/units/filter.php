@@ -1,7 +1,7 @@
 <?php
 declare(strict_types=1);
 
-use Serv\ProgramServices;
+use Serv\UnitServices;
 
 require_once dirname(__DIR__, 2) . '/bootstrap.php';
 require_once dirname(__DIR__, 2) . '/app/Support/helper.php';
@@ -19,12 +19,12 @@ if ($_SERVER['REQUEST_METHOD'] !== 'GET') {
 }
 
 try {
-    $serv = new ProgramServices();
+    $serv = new UnitServices();
     $serv->filter();
 } catch (Throwable $e) {
     logError($e, 'Failed to process filter request.', 'ERROR', [
-        'action' => 'filter program items',
-        'endpoint' => 'programs/filter'
+        'action' => 'filter unit items',
+        'endpoint' => 'units/filter'
     ]);
 
     jsonResponse(500);
